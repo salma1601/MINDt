@@ -6,7 +6,7 @@ test_dir = resource_filename(Requirement.parse("pydicom"), "dicom/testfiles")
 testcharset_dir = resource_filename(Requirement.parse("pydicom"),
                                     "dicom/testcharsetfiles")
 
-dicom_filename = os.path.join(test_dir, "rtplan.dcm")
+dicom_filename = os.path.join(test_dir, "MR_small.dcm")
 
 
 def test_set_slice_thikness():
