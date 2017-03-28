@@ -34,8 +34,8 @@ def short_repr(dcms):
     return this_repr
 
 
-def load_dcm(dcm, dtype=None):
-    """Load a dcm and check if it is a dicom Dataset
+def load_dcm(dcm):
+    """Load a dcm and check if it is a dicom FileDataset
 
     Parameters:
     -----------
@@ -48,12 +48,12 @@ def load_dcm(dcm, dtype=None):
         A loaded DICOM object.
     """
     if isinstance(dcm, _basestring):
-        # data is a filename, we load it
+        # dcm is a filename, we load it
         dcm = dicom.read_file(dcm)
     elif not isinstance(dcm, dicom.dataset.FileDataset):
         raise TypeError("Data given cannot be loaded because it is"
-                        " not compatible with dicom format:\n"
-                        + short_repr(dcm))
+                        " not compatible with dicom format:\n" +
+                        short_repr(dcm))
     return dcm
 
 
@@ -62,7 +62,7 @@ def check_dcm(dcm):
         if not os.path.exists(dcm):
             raise ValueError("File not found: '%s'" % dcm)
 
-    # Otherwise, it should be a filename or a SpatialImage, we load it
+    # Otherwise, it should be a filename or a FileDataset, we load it
     dcm = load_dcm(dcm)
     return dcm
 
@@ -98,8 +98,8 @@ def _get_slice_thickness(dcm):
 
     Parameters
     ----------
-    dcm : str
-        DICOM object.
+    dcm : dcm-like object
+        dcm object to modify.
 
     Returns
     -------
@@ -108,13 +108,13 @@ def _get_slice_thickness(dcm):
     """
     plan = check_dcm(dcm)
     if not _check_name(plan, 'SharedFunctionalGroupsSequence'):
-        raise ValueError('Inexistant Shared Functional Groups Sequence in '
-                         + short_repr(dcm))
+        raise ValueError('Inexistant Shared Functional Groups Sequence in ' +
+                         short_repr(dcm))
 
     functional_data = plan.SharedFunctionalGroupsSequence[0]
     if not _check_name(functional_data, 'PixelMeasuresSequence'):
-        raise ValueError('Inexistant Pixel Measures Sequence in '
-                         + short_repr(dcm))
+        raise ValueError('Inexistant Pixel Measures Sequence in ' +
+                         short_repr(dcm))
 
     pixel_data = functional_data.PixelMeasuresSequence[0]
     if not _check_name(pixel_data, 'SliceThickness'):
@@ -129,7 +129,7 @@ def set_slice_thickness(dcm, slice_thickness, copy=True):
 
     Parameters
     ----------
-    dcm : DICOM object
+    dcm : dcm-like object
         dcm object to modify.
 
     slice_thickness: float
@@ -148,13 +148,13 @@ def set_slice_thickness(dcm, slice_thickness, copy=True):
         plan.copy()
 
     if not _check_name(plan, 'SharedFunctionalGroupsSequence'):
-        raise ValueError('Inexistant "Shared Functional Groups Sequence" in '
-                         + short_repr(dcm))
+        raise ValueError('Inexistant "Shared Functional Groups Sequence" in ' +
+                         short_repr(dcm))
 
     functional_data = plan.SharedFunctionalGroupsSequence[0]
     if not _check_name(functional_data, 'PixelMeasuresSequence'):
-        raise ValueError('Inexistant "Pixel Measures Sequence" in '
-                         + short_repr(dcm))
+        raise ValueError('Inexistant "Pixel Measures Sequence" in ' +
+                         short_repr(dcm))
 
     pixel_data = functional_data.PixelMeasuresSequence[0]
     if not _check_name(pixel_data, 'SliceThickness'):
