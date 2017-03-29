@@ -30,13 +30,17 @@ def _get_acquisition_parameter(acquisition_filename, parameter_pattern):
         raise ValueError('multiple matches for pattern {0} in file {1}'.format(
             acquisition_filename, parameter_pattern))
 
-    acquisition_data = open(acquisition_filename, 'r')
-    acquisition_lines = acquisition_data.readlines()
-    acquisition_data.close()
-    for line_number, line in enumerate(acquisition_lines):
-        match = re.findall(parameter_pattern, line)
-        if match:
-            return acquisition_lines[line_number + 1]
+    # Try guess if value follows immediately or after a line break
+    parameter = re.search(parameter_pattern + '\n(.*)\n', acquisition_str)
+    if parameter is not None:
+        return parameter.group(1)
+    else:
+        parameter = re.search(parameter_pattern + '(.*)\n', acquisition_str)
+        if parameter is not None:
+            return parameter.group(1)
+        else:
+            raise ValueError('Could not find value for {0}'.format(
+                parameter_pattern))
 
 
 def get_slice_sepn(acquisition_filename):
