@@ -4,12 +4,12 @@
    :target: https://travis-ci.org/small-animal-MRI/MINDt
    :alt: Build Status
 
-.. image:: https://coveralls.io/repos/github/samll-animal-mri/MINDt/badge.svg?branch=status 
-    :target: https://coveralls.io/github/samll-animal-mri/MINDt?branch=status 
+.. image:: https://coveralls.io/repos/github/samll-animal-mri/MINDt/badge.svg?branch=master 
+    :target: https://coveralls.io/github/samll-animal-mri/MINDt?branch=master 
 MINDt
 =====
 
-Process-asl builds relevant **pipelines** for processing fMRI and perfusion images.
+Mindt builds relevant **pipelines** for processing multimodal small animal brain MRI images.
 
 Dependencies
 ============
