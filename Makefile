@@ -29,7 +29,7 @@ inplace:
 	$(PYTHON) setup.py build_ext -i
 
 test-code:
-	$(NOSETESTS) -s procasl
+	$(NOSETESTS) -s mindt
 
 test-doc:
 	$(NOSETESTS) -s --with-doctest --doctest-tests --doctest-extension=rst \
@@ -38,7 +38,7 @@ test-doc:
 test-coverage:
 	rm -rf coverage .coverage
 	$(NOSETESTS) -s --with-coverage --cover-html --cover-html-dir=coverage \
-	--cover-package=procasl procasl
+	--cover-package=mindt mindt
 
 test: test-code test-doc
 
