@@ -1,7 +1,7 @@
 [run]
 branch = True
-source = procasl
-include = */procasl/*
+source = mindt
+include = */mindt/*
 omit =
-    */procasl/externals/*
-*/setup.py
+    */mindt/externals/*
+    */setup.py
