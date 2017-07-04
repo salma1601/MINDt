@@ -4,8 +4,8 @@
    :target: https://travis-ci.org/small-animal-MRI/MINDt
    :alt: Build Status
 
-.. image:: https://coveralls.io/repos/github/samll-animal-MRI/MINDt/badge.svg?branch=master 
-    :target: https://coveralls.io/github/samll-animal-MRI/MINDt?branch=master 
+.. image:: https://coveralls.io/repos/github/small-animal-MRI/MINDt/badge.svg?branch=master
+    :target: https://coveralls.io/github/small-animal-MRI/MINDt?branch=master
 
 MINDt
 =====
