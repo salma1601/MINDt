@@ -21,4 +21,4 @@ For details, see Grandjean, Schroeter et al. Neuroimage 2014
 
 Licence
 ----------
-Unknown
+See https://central.xnat.org

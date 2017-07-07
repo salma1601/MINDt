@@ -1,4 +1,4 @@
-ZURICH
+ZURICH TEST-RETEST
 
 
 Notes
@@ -46,4 +46,4 @@ doi:10.1016/j.neuroimage.2015.07.090.
 
 Licence
 ----------
-Unknown
+See https://central.xnat.org
