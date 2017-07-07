@@ -10,8 +10,7 @@ Introduction: Small-animal MRI pipelines
 What is MINDt: Multimodal Imaging of Neurodegenerative Diseases and Therapies
 =============================================================================
 
-    MINDt builds **easy-to-use** pipelines to process small animal brain MRI multimodal
-images. Examples include (but are not restricted to) mouse models of Alzheimer disease.
+    MINDt builds **easy-to-use** pipelines to process small animal brain MRI multimodal images. Examples include (but are not restricted to) mouse models of Alzheimer disease.
 
 
 Dependencies
