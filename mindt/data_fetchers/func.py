@@ -16,38 +16,33 @@ def fetch_zurich_test_retest(subjects=range(15), sessions=[1], data_dir=None,
     subjects : sequence of int or None, optional
         ids of subjects to load, default to loading all subjects.
 
-    sessions: iterable of int, optional
+    sessions : iterable of int, optional
         The sessions to load. Load only the first session by default.
 
-    data_dir: string, optional
+    data_dir : string, optional
         Path of the data directory. Used to force data storage in a specified
         location. Default: None
 
-    resume: bool, optional (default True)
+    resume : bool, optional (default True)
         If true, try resuming download if possible.
 
-    verbose: int, optional (default 0)
+    verbose : int, optional (default 0)
         Defines the level of verbosity of the output.
 
     Returns
     -------
-    data: sklearn.datasets.base.Bunch
-        Dictionary-like object, the interest attributes are :
-        'func': string list. Paths to functional images.
-        'anat': string list. Paths to anatomic images.
-        'session': numpy array. List of ids corresponding to images sessions.
+    data : sklearn.datasets.base.Bunch
+        Dictionary-like object, the interest attributes are:
+
+        - 'func': string list. Paths to functional images.
+        - 'anat': string list. Paths to anatomic images.
+        - 'session': numpy array. List of ids corresponding to images sessions.
 
     Notes
-    ------
+    -----
     This dataset is composed of 2 sessions of 15 male mice.
-    For each session, three sets of data are available:
-
-    - anatomical
-
-    - functional
-
     For each mice, 2 resting-state scans of continuous EPI
-    functional volumes were collected
+    functional volumes were collected, both with their anatomical scan.
 
     Session 2  was collected 15-20 days after Session 1.
 
@@ -59,16 +54,15 @@ def fetch_zurich_test_retest(subjects=range(15), sessions=[1], data_dir=None,
 
     :Reference:
         `Mapping the Mouse Brain with Rs-fMRI: An Optimized Pipeline for
-        Functional Network Identification
-        < http://dx.doi.org/10.1016/j.neuroimage.2015.07.090>`_
-        NeuroImage 123 (2015): 11-21.
-        V. Zerbi, J. Grandjean, M. Rudin, and N. Wenderoth.
-
+        Functional Network Identification.
+        <http://dx.doi.org/10.1016/j.neuroimage.2015.07.090>`_
+        NeuroImage 123 (2015): 11-21. V. Zerbi, J. Grandjean, M. Rudin
+        and N. Wenderoth.
     """
     if url is None:
         url = 'https://central.xnat.org'
 
-    dataset_name = 'zurich'
+    dataset_name = 'zurich_test'
     data_dir = _get_dataset_dir(dataset_name, data_dir=data_dir,
                                 verbose=verbose)
 
@@ -172,38 +166,28 @@ def fetch_zurich_anesthesiant(subjects=range(30), url=None,
     subjects : sequence of int or None, optional
         ids of subjects to load, default to loading all subjects.
 
-    data_dir: string, optional
+    data_dir : string, optional
         Path of the data directory. Used to force data storage in a specified
         location. Default: None
 
-    resume: bool, optional (default True)
+    resume : bool, optional (default True)
         If true, try resuming download if possible.
 
-    verbose: int, optional (default 0)
+    verbose : int, optional (default 0)
         Defines the level of verbosity of the output.
 
     Returns
     -------
-    data: sklearn.datasets.base.Bunch
-        Dictionary-like object, the interest attributes are :
-        'func': string list. Paths to functional images.
-        'anat': string list. Paths to anatomic images.
-        'session': numpy array. List of ids corresponding to images sessions.
+    data : sklearn.datasets.base.Bunch
+        Dictionary-like object, the interest attributes are:
+
+        - 'func': string list. Paths to functional images.
+        - 'anesthesiant': string list. Information on used anesthesiant.
 
     Notes
     ------
-    This dataset is composed of 22 male mice.
-    For each session, three sets of data are available:
-
-    - anatomical
-
-    - functional
-
-    For each mice, 2 resting-state scans of continuous EPI
-    functional volumes were collected
-
-    Session 2  was collected 15-20 days after Session 1.
-
+    This dataset is composed of 30 male mice with different anesthesia
+    protocols.
 
     References
     ----------
@@ -214,9 +198,9 @@ def fetch_zurich_anesthesiant(subjects=range(30), url=None,
         `Optimization of anesthesia protocol for resting-state fMRI in mice
         based on differential effects of anesthetics on functional connectivity
         patterns.
-        < http://dx.doi.org/10.1016/j.neuroimage.2014.08.043>`_
-        NeuroImage 102 (2014): 838-847.
-        J. Grandjean and A. Schroeter and I. Batata and M. Rudin.
+        <http://dx.doi.org/10.1016/j.neuroimage.2014.08.043>`_
+        NeuroImage 102 (2014): 838-847. J. Grandjean, A. Schroeter,
+        I. Batata and M. Rudin.
     """
     if url is None:
         url = 'https://central.xnat.org'
