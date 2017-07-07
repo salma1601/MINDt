@@ -18,7 +18,7 @@ setup(
     description=("MRI Rodents processing in python."),
     license="CeCILL-B",
     keywords="rodents registration dicom",
-    url="https://github.com/samll-animal-mri/MINDt",
+    url="https://github.com/samll-animal-MRI/MINDt",
     packages=['mindt', ],
     long_description=read('README.rst'),
     classifiers=[
