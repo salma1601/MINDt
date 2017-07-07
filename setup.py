@@ -24,7 +24,7 @@ setup(
     long_description=read('README.rst'),
     classifiers=[
         "Topic :: Scientific/Engineering",
-        "License :: CeCILL-B",
+        "License :: CeCILL-B"],
     install_requires=["matplotlib>=1.1.1",
 		     "nibabel>=2.0.1",
 		     "nipype==0.11.0",
@@ -40,5 +40,5 @@ setup(
 		     "ipython",
 		     "Sphinx",
 		     "sphinx-rtd-theme",
-		     "Pillow"]],
+		     "Pillow"],
 )
