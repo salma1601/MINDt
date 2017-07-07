@@ -13,5 +13,5 @@ numpydoc >= 0.5
 ipython
 Sphinx
 sphinx-rtd-theme
-sphinx_gallery
 Pillow
+

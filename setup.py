@@ -1,47 +1,29 @@
-DISTNAME = 'mindt'
-DESCRIPTION = 'MRI Rodents processing in Python'
-with open('README.rst') as fp:
-    LONG_DESCRIPTION = fp.read()
-MAINTAINER = 'Nachiket Nadkarni'
-MAINTAINER_EMAIL = 'nadkarni@fastmail.fm'
-URL = 'https://github.com/samll-animal-MRI/MINDt'
-LICENSE = 'CeCILL-B'
-DOWNLOAD_URL = 'https://github.com/samll-animal-MRI/MINDt'
+
+import os
+from setuptools import setup
 
 
-if __name__ == "__main__":
-    if is_installing():
-        module_check_fn = _VERSION_GLOBALS['_check_module_dependencies']
-        module_check_fn(is_mindt_installing=True)
+# Utility function to read the README file.
+# Used for the long_description.  It's nice, because now 1) we have a top level
+# README file and 2) it's easier to type in the README file than to put a raw
+# string in below ...
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-    install_requires = \
-        ['%s>=%s' % (mod, meta['min_version'])
-            for mod, meta in _VERSION_GLOBALS['REQUIRED_MODULE_METADATA']
-            if not meta['required_at_installation']]
 
-    setup(name=DISTNAME,
-          maintainer=MAINTAINER,
-          maintainer_email=MAINTAINER_EMAIL,
-          description=DESCRIPTION,
-          license=LICENSE,
-          url=URL,
-          version=VERSION,
-          download_url=DOWNLOAD_URL,
-          long_description=LONG_DESCRIPTION,
-          zip_safe=False,  # the package can run out of an .egg file
-          classifiers=[
-              'Intended Audience :: Science/Research',
-              'Intended Audience :: Developers',
-              'License :: OSI Approved',
-              'Programming Language :: Python',
-              'Topic :: Software Development',
-              'Topic :: Scientific/Engineering',
-              'Operating System :: Microsoft :: Windows',
-              'Operating System :: POSIX',
-              'Operating System :: Unix',
-              'Operating System :: MacOS',
-              'Programming Language :: Python :: 2.7',
-          ],
-          packages=find_packages(),
-          package_data={'mindt.data_fetchers.description': ['*.rst']},
-          install_requires=install_requires,)
+setup(
+    name="mindt",
+    version="alpha",
+    maintainer="Nachiket Nadkarni",
+    maintainer_email="nadkarni@fastmail.fm",
+    description=("MRI Rodents processing in python."),
+    license="CeCILL-B",
+    keywords="rodents registration dicom",
+    url="https://github.com/samll-animal-MRI/MINDt",
+    packages=['mindt', ],
+    long_description=read('README.rst'),
+    classifiers=[
+        "Topic :: Scientific/Engineering",
+        "License :: CeCILL-B",
+    ],
+)
