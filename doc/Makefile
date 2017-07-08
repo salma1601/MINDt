@@ -49,6 +49,7 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf auto_examples/
+	rm -rf generated/*
 	rm -rf modules/generated/*
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
@@ -181,3 +182,22 @@ html-noplot:
 	$(SPHINXBUILD) -D plot_gallery=0 -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+install:
+	rm -rf _build/doctrees _build/small-animal-mri.github.io/MINDt
+	# first clone the nilearn.github.io repo because it may ask
+	# for password and we don't want to delay this long build in
+	# the middle of it
+	# --no-checkout just fetches the root folder without content
+	# --depth 1 is a speed optimization since we don't need the
+	# history prior to the last commit
+	git clone --no-checkout --depth 1 https://github.com/small-animal-mri/small-animal-mri.github.io/  _build/small-animal-mri.github.io/
+	touch _build/small-animal-mri.github.io/.nojekyll
+	make html
+	cd _build/ && \
+	cp -r html/* small-animal-mri.github.io && \
+	cd small-animal-mri.github.io && \
+	git add * && \
+	git add .nojekyll && \
+	git commit -a -m 'Make install' && \
+	git push

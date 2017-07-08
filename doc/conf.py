@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# alzheimer-spreading documentation build configuration file, created by
+# MINDt documentation build configuration file, created by
 # sphinx-quickstart on Sun Dec 20 18:28:10 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -14,17 +14,19 @@
 
 import sys
 import os
+import sphinx
+from distutils.version import LooseVersion
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('sphinxext'))
+import sphinx_gallery
+
+# We also add the directory just above to enable local imports of mindt
+sys.path.insert(0, os.path.abspath('..'))
 
 # -- General configuration ------------------------------------------------
-
-# If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
-
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -33,11 +35,8 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-#    'sphinx.ext.todo',
-#    'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'numpydoc.numpydoc',
-#    'numpy_ext.numpydoc',
     'IPython.sphinxext.ipython_directive',
     'IPython.sphinxext.ipython_console_highlighting',
     'sphinx_gallery.gen_gallery']
@@ -62,8 +61,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'mindt'
-copyright = u'2016, The mindt developers'
+project = u'MINDt'
+copyright = u'2017, The MINDt developers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -86,7 +85,7 @@ release = ''
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', 'templates', 'includes']
+exclude_patterns = ['_build', '_templates']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -129,10 +128,10 @@ html_theme = 'sphinx_rtd_theme'  # default
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'Pathology Propagation'
+html_title = 'Multimodal Imaging of Neurodegenerative Diseases and Therapies'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-html_short_title = 'Patho-Propagation'
+html_short_title = 'MINDt'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
@@ -218,7 +217,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'mindt.tex', u'mindt Documentation',
+  ('index', 'mindt.tex', u'MINDt Documentation',
    u'Nadkarni', 'manual'),
 ]
 
@@ -240,19 +239,44 @@ latex_documents = [
 #latex_appendices = []
 
 # If false, no module index is generated.
-latex_use_modindex = False
+if LooseVersion(sphinx.__version__) < LooseVersion('1.5'):
+    latex_use_modindex = False
+
 latex_domain_indices = False
 
 # If false, no module index is generated.
 #latex_domain_indices = True
+# Show the page numbers in the references
+latex_show_pagerefs = True
 
+# Show URLs in footnotes
+latex_show_urls = 'footnote'
+
+trim_doctests_flags = True
+
+_python_doc_base = 'http://docs.python.org/2.7'
+
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {
+    _python_doc_base: None,
+    'http://docs.scipy.org/doc/numpy': None,
+    'http://docs.scipy.org/doc/scipy/reference': None,
+    'http://matplotlib.org/': None,
+    'http://scikit-learn.org/0.17': None,
+    'http://nipy.org/nibabel': None,
+}
+
+extlinks = {
+    'simple': (_python_doc_base + '/reference/simple_stmts.html#%s', ''),
+    'compound': (_python_doc_base + '/reference/compound_stmts.html#%s', ''),
+}
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'mindt', u'mindt Documentation',
+    ('index', 'mindt', u'MINDt Documentation',
      [u'Nadkarni'], 1)
 ]
 
@@ -266,7 +290,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'mindt', u'mindt Documentation',
+  ('index', 'mindt', u'MINDt Documentation',
    u'Nadkarni', 'mindt', 'One line description of project.',
    'Miscellaneous'),
 ]
@@ -287,7 +311,7 @@ texinfo_documents = [
 sphinx_gallery_conf = {
     # Your documented modules. In this case sphinx_gallery and numpy
     # in a tuple of strings.
-    'doc_module': 'mindt', #('mindt', 'nipype', 'nilearn'),
+    'doc_module': 'mindt',
     'reference_url': {
         # The module you locally document uses a None
         'mindt': None,
@@ -298,11 +322,27 @@ sphinx_gallery_conf = {
         'nibabel': 'http://nipy.org/nibabel',
         'nipype': 'http://nipy.org/nipype/',
         'nilearn': 'http://nilearn.github.io'},
-    # path to your examples scripts
-    'examples_dirs': ['../examples'],
-    # path where to save gallery generated examples
-    'gallery_dirs': ['auto_examples'],
-    # path to store the module using example template
-    #'mod_example_dir': 'modules/generated'
     }
 
+# Get rid of spurious warnings due to some interaction between
+# autosummary and numpydoc. See
+# https://github.com/phn/pytpm/issues/3#issuecomment-12133978 for more
+# details
+numpydoc_show_class_members = False
+
+
+def touch_example_backreferences(app, what, name, obj, options, lines):
+    # generate empty examples files, so that we don't get
+    # inclusion errors if there are no examples for a class / module
+    examples_path = os.path.join(app.srcdir, "generated",
+                                 "%s.examples" % name)
+    print(examples_path)
+    if not os.path.exists(examples_path):
+        # touch file
+        open(examples_path, 'w').close()
+
+# Add the 'copybutton' javascript, to hide/show the prompt in code
+# examples
+def setup(app):
+    app.add_javascript('copybutton.js')
+    app.connect('autodoc-process-docstring', touch_example_backreferences)

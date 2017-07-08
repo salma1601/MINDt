@@ -24,4 +24,4 @@ MINDt API Reference
    :template: function.rst
 
    fetch_zurich_test_retest
-   fetch_zurich_anest
+   fetch_zurich_anesthesiant

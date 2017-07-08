@@ -10,8 +10,7 @@ Introduction: Small-animal MRI pipelines
 What is MINDt: Multimodal Imaging of Neurodegenerative Diseases and Therapies
 =============================================================================
 
-    MINDt builds **easy-to-use** pipelines to process small animal brain MRI multimodal
-images. Examples include (but are not restricted to) mouse models of Alzheimer disease.
+    MINDt builds **easy-to-use** pipelines to process small animal brain MRI multimodal images. Examples include (but are not restricted to) mouse models of Alzheimer disease.
 
 
 Dependencies
@@ -80,3 +79,4 @@ In the ``MINDt`` directory created by the previous step, run
 (again, as a shell command)::
 
     python setup.py install --user
+

@@ -1,3 +1,24 @@
+# Backup files
+*~
+
+# Cache and data folders
+nilearn_cache
+nilearn_data
+
+# Doc generated files
+doc/.nojekyll
+doc/_build/
+doc/auto_examples/
+doc/modules/generated/
+doc/datasets/generated/
+doc/generated/
+
+# Compressed files
+*.zip
+*.nt.bz2
+*.tar.gz
+*.tgz
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
